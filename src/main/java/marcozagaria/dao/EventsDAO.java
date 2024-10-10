@@ -2,7 +2,11 @@ package marcozagaria.dao;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import marcozagaria.entities.Concerto;
 import marcozagaria.entities.Event;
+import marcozagaria.entities.Genere;
+
+import java.util.List;
 
 public class EventsDAO {
     private EntityManager em;
@@ -44,5 +48,18 @@ public class EventsDAO {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+    }
+
+
+    public List<Concerto> getConcertiInStreaming(boolean inStreaming) {
+        return em.createQuery("SELECT c FROM Concerto c WHERE c.inStreaming = :inStreaming", Concerto.class)
+                .setParameter("inStreaming", inStreaming)
+                .getResultList();
+    }
+
+    public List<Concerto> getConcertiPerGenere(Genere genere) {
+        return em.createQuery("SELECT c FROM Concerto c WHERE c.genere = :genere", Concerto.class)
+                .setParameter("genere", genere)
+                .getResultList();
     }
 }

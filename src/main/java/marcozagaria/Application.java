@@ -31,7 +31,12 @@ public class Application {
 //        peopleDAO.save(marco);
         Person person1 = peopleDAO.findById(1);
         Attendance attendace = new Attendance(person1, evento1);
-        attendancesDAO.save(attendace);
-
+//        attendancesDAO.save(attendace);
+        Concerto concerto1 = new Concerto("concerto", LocalDate.of(2024, 10, 17), "concerto di vasco", TipoEvento.PRIVATO, 10000, location1, Genere.ROCK, false);
+//        eventsDAO.save(concerto1);
+        Concerto concerto2 = new Concerto("concerto", LocalDate.of(2025, 05, 10), "concerto di cesare cremonini", TipoEvento.PRIVATO, 10000, location1, Genere.POP, true);
+//        eventsDAO.save(concerto2);
+        eventsDAO.getConcertiInStreaming(true).forEach(System.out::println);
+        eventsDAO.getConcertiPerGenere(Genere.ROCK).forEach(System.out::println);
     }
 }
