@@ -5,6 +5,7 @@ import jakarta.persistence.EntityTransaction;
 import marcozagaria.entities.Concerto;
 import marcozagaria.entities.Event;
 import marcozagaria.entities.Genere;
+import marcozagaria.entities.PArtitaDiCalcio;
 
 import java.util.List;
 
@@ -60,6 +61,16 @@ public class EventsDAO {
     public List<Concerto> getConcertiPerGenere(Genere genere) {
         return em.createQuery("SELECT c FROM Concerto c WHERE c.genere = :genere", Concerto.class)
                 .setParameter("genere", genere)
+                .getResultList();
+    }
+
+    public List<PArtitaDiCalcio> getPartiteVinteInCasa() {
+        return em.createQuery("SELECT p FROM PArtitaDiCalcio p WHERE p.squadraVincente = p.squadraDiCasa", PArtitaDiCalcio.class)
+                .getResultList();
+    }
+
+    public List<PArtitaDiCalcio> getPartiteVinteInTrasferta() {
+        return em.createQuery("SELECT p FROM PArtitaDiCalcio p WHERE p.squadraVincente = p.squadraOspite", PArtitaDiCalcio.class)
                 .getResultList();
     }
 }
